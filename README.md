@@ -43,7 +43,7 @@ The process is a little bit different for each case. All of this relies a Docker
 
 | Argument | Optional | Default | Description |
 | -------- | :------: | :-----: | ----------- |
-| COCKPIT_VERSION | yes | `LATEST` | The version of the Petals Cockpit distribution to use. `LATEST` is the latest stable release, `SNAPSHOT` is the latest build (may be unstable). You can also specify the tagged version number for instance: `0.21.0`. |
+| COCKPIT_VERSION | yes | `LATEST` | The version of the Petals Cockpit distribution to use. `LATEST` is the latest stable release, `SNAPSHOT` is the latest build (may be unstable). You can also specify the tagged version number for instance: `v0.21.0`. |
 
 By using these parameters correctly, you can achieve what you want, provided the artifact is present on gitlab.
 
@@ -51,11 +51,21 @@ By using these parameters correctly, you can achieve what you want, provided the
 
 ### Stable version
 
-The example is quite simple to understand.
+The example is quite simple to understand:
 
 ```
 docker build \
-		--build-arg COCKPIT_VERSION=0.21.0 \
+		--build-arg COCKPIT_VERSION=LATEST \
+		-t petalslink/petals-cockpit:latest \
+		-t petalslink/petals-cockpit:0.21.0 \
+		.
+
+```
+It's also possible to choose a [specific tag](https://gitlab.com/linagora/petals-cockpit/tags):
+
+```
+docker build \
+		--build-arg COCKPIT_VERSION=v0.21.0 \
 		-t petalslink/petals-cockpit:latest \
 		-t petalslink/petals-cockpit:0.21.0 \
 		.
@@ -69,7 +79,7 @@ Just use the `SNAPSHOT` keyword:
 
 ```
 docker build \
-		--build-arg PETALS_VERSION=SNAPSHOT \
+		--build-arg COCKPIT_VERSION=SNAPSHOT \
 		-t petalslink/petals-cockpit:unstable \
 		-t petalslink/petals-cockpit:0.22.0-SNAPSHOT \
 		.

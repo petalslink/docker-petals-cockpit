@@ -28,7 +28,7 @@ RUN apk update  && \
   apk upgrade  && \
   { [ "${COCKPIT_VERSION}" = "LATEST" ] && export DOWNLOAD_URL="${DOWNLOAD_URL}v0.21.0/download?job=release-product"; } || \
   { [ "${COCKPIT_VERSION}" = "SNAPSHOT" ] && export DOWNLOAD_URL="${DOWNLOAD_URL}master/download?job=package-product-master"; } || \
-  { export DOWNLOAD_URL="${DOWNLOAD_URL}v${COCKPIT_VERSION}/download?job=release-product"; } && \
+  { export DOWNLOAD_URL="${DOWNLOAD_URL}${COCKPIT_VERSION}/download?job=release-product"; } && \
   echo "Downloading ${COCKPIT_VERSION}: ${DOWNLOAD_URL}" && \
   curl -L "${DOWNLOAD_URL}" -o /tmp/petals-cockpit.zip --silent && \
   mkdir /tmp/petals-cockpit-zip && \
