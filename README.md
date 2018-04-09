@@ -5,8 +5,6 @@ Petals cockpit in an administration tool providing a visual interface for Petals
 
 For the first run, remember to take a look at the terminal, where you should find an URL with a user setup token.
 
-> For the moment, JMX connections do not work outside the container.
-
 ## Launch a container from this image
 
 ```properties
