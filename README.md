@@ -9,10 +9,10 @@ For the first run, remember to take a look at the terminal, where you should fin
 
 ```properties
 # Download the image
-docker pull petalslink/petals-cockpit:latest
+docker pull petals/petals-cockpit:latest
 
 # Start in detached mode
-docker run -d -p 8080:8080 --name petals-cockpit petalslink/petals-cockpit:latest
+docker run -d -p 8080:8080 --name petals-cockpit petals/petals-cockpit:latest
 
 # Verify the container was launched
 docker ps
@@ -27,12 +27,12 @@ sudo lsof -i :8080
 docker inspect petals-cockpit
 
 # Introspect the container
-docker exec -ti petals-cockpit /bin/bash
+docker exec -ti petals-cockpit /bin/sh
 ```
 
 The example shows how to get the last version.  
 You can obviously change the version. Each Petals container version has its own image.
-Versions match. As an example, to get Petals Cockpit 0.20.0, just type in `docker pull petalslink/petals-cockpit:0.20.0`.
+Versions match. As an example, to get Petals Cockpit 0.20.0, just type in `docker pull petals/petals-cockpit:0.20.0`.
 
 ## Build an image (introduction)
 
@@ -54,8 +54,8 @@ The example is quite simple to understand:
 ```
 docker build \
 		--build-arg COCKPIT_VERSION=LATEST \
-		-t petalslink/petals-cockpit:latest \
-		-t petalslink/petals-cockpit:0.21.0 \
+		-t petals/petals-cockpit:latest \
+		-t petals/petals-cockpit:0.21.0 \
 		.
 
 ```
@@ -64,8 +64,8 @@ It's also possible to choose a [specific tag](https://gitlab.com/linagora/petals
 ```
 docker build \
 		--build-arg COCKPIT_VERSION=v0.21.0 \
-		-t petalslink/petals-cockpit:latest \
-		-t petalslink/petals-cockpit:0.21.0 \
+		-t petals/petals-cockpit:latest \
+		-t petals/petals-cockpit:0.21.0 \
 		.
 ```
 
@@ -78,12 +78,38 @@ Just use the `SNAPSHOT` keyword:
 ```
 docker build \
 		--build-arg COCKPIT_VERSION=SNAPSHOT \
-		-t petalslink/petals-cockpit:unstable \
-		-t petalslink/petals-cockpit:0.22.0-SNAPSHOT \
+		-t petals/petals-cockpit:unstable \
+		-t petals/petals-cockpit:0.22.0-SNAPSHOT \
 		.
 ```
 
 Such images should not be shared on Petals's official repository.
+
+## Publish the image on Docker Hub
+
+This section is obviously reserved to those that have access to the petals organization.  
+**It is assumed you already built the image locally and tested it.**
+
+```properties
+# Define your properties
+DOCKER_HUB_USER=""
+DOCKER_HUB_PWD=""
+COCKPIT_VERSION="0.21.0"
+
+# Connect to the hub
+docker login -u=${DOCKER_HUB_USER} -p=${DOCKER_HUB_PWD}
+
+# Push the image
+docker push petals/petals-cockpit:${COCKPIT_VERSION}
+docker push petals/petals-cockpit:latest
+
+# Log out
+docker logout
+
+# Tag the Git repository
+git tag -a -f "docker-petals-cockpit-${PETALS_VERSION}" -m "Dockerfile for Petals Cockpit ${RELEASE_VERSION}"
+git push --tags origin master
+```
 
 ## Supported Docker versions
 
