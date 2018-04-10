@@ -34,6 +34,34 @@ The example shows how to get the last version.
 You can obviously change the version. Each Petals container version has its own image.
 Versions match. As an example, to get Petals Cockpit 0.20.0, just type in `docker pull petals/petals-cockpit:0.20.0`.
 
+## Run parameters
+
+When running Petals Cockpit by a docker image, a default administrator user is added automatically:
+* user: `admin`
+* username: `admin`
+* password: `admin`
+
+It is possible to change this user with the following parameters: 
+
+| Argument | Optional | Default | Description |
+| -------- | :------: | :-----: | ----------- |
+| COCKPIT_USER | yes | `admin` | The user's id, also his login. |
+| COCKPIT_USERNAME | yes | `admin` | The name under which the user will appear. |
+| COCKPIT_PASS | yes | `admin` | The user's password. |
+
+> An user added with parameters is always added as an admin.
+
+## Run with parameters example
+It is pretty straightforward :
+```
+docker run \
+	-p 8080:8080 --name petals-cockpit \
+	-e COCKPIT_USER="user001" \
+	-e COCKPIT_NAME="myName" \
+	-e COCKPIT_PASS="myOwnPassword" \
+	petals/petals-cockpit:latest
+```
+
 ## Build an image (introduction)
 
 This project allows to build a Docker image for both tagged releases and the last snapshot versions of Petals Cockpit.  
