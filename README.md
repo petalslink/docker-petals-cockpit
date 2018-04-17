@@ -48,6 +48,7 @@ It is possible to change this user with the following parameters:
 | COCKPIT_USER | yes | `admin` | The user's id, also his login. |
 | COCKPIT_USERNAME | yes | `admin` | The name under which the user will appear. |
 | COCKPIT_PASS | yes | `admin` | The user's password. |
+| COCKPIT_WORKSPACE | yes | - | The user's workspace. Which will be set as current workspace for the user.  **Beware, only compatible with version 0.22.0 or higher.** |
 
 > An user added with parameters is always added as an admin.
 
@@ -59,6 +60,7 @@ docker run \
 	-e COCKPIT_USER="user001" \
 	-e COCKPIT_NAME="myName" \
 	-e COCKPIT_PASS="myOwnPassword" \
+	-e COCKPIT_WORKSPACE="myWorkspace" \
 	petals/petals-cockpit:latest
 ```
 
@@ -72,6 +74,8 @@ The process is a little bit different for each case. All of this relies a Docker
 | COCKPIT_VERSION | yes | `LATEST` | The version of the Petals Cockpit distribution to use. `LATEST` is the latest stable release, `SNAPSHOT` is the latest build (may be unstable). You can also specify the tagged version number for instance: `v0.21.0`. |
 
 By using these parameters correctly, you can achieve what you want, provided the artifact is present on gitlab.
+
+Workspace generation feature is compatible with `SNAPSHOT`and version `0.22.0` (or higher) builds, see run parameters.
 
 ## Build an image (examples)
 
