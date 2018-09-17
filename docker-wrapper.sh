@@ -8,8 +8,8 @@ cp_user="admin"
 cp_name="admin"
 cp_pass="admin"
 
-[ ! -z "${COCKPIT_USER+x}" ] && cp_user="$COCKPIT_USER"
-[ ! -z "${COCKPIT_USERNAME+x}" ] && cp_name="$COCKPIT_USERNAME"
+[ ! -z "${COCKPIT_USERNAME+x}" ] && cp_user="$COCKPIT_USERNAME"
+[ ! -z "${COCKPIT_NAME+x}" ] && cp_name="$COCKPIT_NAME"
 [ ! -z "${COCKPIT_PASS+x}" ] && cp_pass="$COCKPIT_PASS"
 
 if [ ! -z "${COCKPIT_WORKSPACE+x}" ]
