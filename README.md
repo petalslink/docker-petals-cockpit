@@ -21,7 +21,7 @@ docker ps
 docker logs petals-cockpit
 
 # Verify the ports used on the host (example)
-sudo lsof -i :8080
+sudo lsof -i :8484
 
 # Get information about the container
 docker inspect petals-cockpit
@@ -37,16 +37,16 @@ Versions match. As an example, to get Petals Cockpit 0.20.0, just type in `docke
 ## Run parameters
 
 When running Petals Cockpit by a docker image, a default administrator user is added automatically:
-* user: `admin`
 * username: `admin`
+* user: `admin`
 * password: `admin`
 
 It is possible to change this user with the following parameters: 
 
 | Argument | Optional | Default | Description |
 | -------- | :------: | :-----: | ----------- |
-| COCKPIT_USER | yes | `admin` | The user's id, also his login. |
-| COCKPIT_USERNAME | yes | `admin` | The name under which the user will appear. |
+| COCKPIT_USERNAME | yes | `admin` | The user's id, also his login. |
+| COCKPIT_NAME | yes | `admin` | The name under which the user will appear. |
 | COCKPIT_PASS | yes | `admin` | The user's password. |
 | COCKPIT_WORKSPACE | yes | - | The user's workspace. Which will be set as current workspace for the user.  **Beware, only compatible with version 0.22.0 or higher.** |
 
@@ -57,7 +57,7 @@ It is pretty straightforward :
 ```
 docker run \
 	-p 8080:8080 --name petals-cockpit \
-	-e COCKPIT_USER="user001" \
+	-e COCKPIT_USERNAME="user001" \
 	-e COCKPIT_NAME="myName" \
 	-e COCKPIT_PASS="myOwnPassword" \
 	-e COCKPIT_WORKSPACE="myWorkspace" \

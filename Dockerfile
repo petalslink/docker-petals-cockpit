@@ -2,7 +2,7 @@
 FROM openjdk:8-jre-alpine
 
 # Expose ports
-EXPOSE 8080
+EXPOSE 8484
 
 # Add tags
 LABEL \
@@ -26,7 +26,7 @@ RUN apk update  && \
   apk add curl bash && \
   rm -rf /var/cache/apk/* && \
   apk upgrade  && \
-  { [ "${COCKPIT_VERSION}" = "LATEST" ] && export DOWNLOAD_URL="${DOWNLOAD_URL}v0.26.0/download?job=release-product"; } || \
+  { [ "${COCKPIT_VERSION}" = "LATEST" ] && export DOWNLOAD_URL="${DOWNLOAD_URL}v1.00.0-beta/download?job=release-product"; } || \
   { [ "${COCKPIT_VERSION}" = "SNAPSHOT" ] && export DOWNLOAD_URL="${DOWNLOAD_URL}master/download?job=package-product-master"; } || \
   { export DOWNLOAD_URL="${DOWNLOAD_URL}${COCKPIT_VERSION}/download?job=release-product"; } && \
   echo "Downloading ${COCKPIT_VERSION}: ${DOWNLOAD_URL}" && \
